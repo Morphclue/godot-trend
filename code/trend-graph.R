@@ -6,4 +6,4 @@ names(df)[1] <- 'Game'
 names(df)[2] <- 'Date'
 
 # e.g. Mon, 22 Jan 2018 07:37:15 GMT
-dates <- parse_date_time(df$Date, orders = 'dbYHMS', tz = 'GMT')
+timestamps <- parse_date_time(df$Date, orders = 'dbYHMS', tz = 'GMT')
