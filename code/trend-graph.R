@@ -8,8 +8,13 @@ names(df)[2] <- 'Date'
 # e.g. Mon, 22 Jan 2018 07:37:15 GMT
 timestamps <- parse_date_time(df$Date, orders = 'dbYHMS', tz = 'GMT')
 
-ggplot(df) +
-  aes(x = floor_date(timestamps, "month")) +
-  geom_bar()
+data <- table(floor_date(timestamps, "month"))
+data <- data.frame(data)
+names(data)[1] <- 'Date'
+names(data)[2] <- 'Count'
 
-count <- table(floor_date(timestamps, "month"))
+data$Count <- cumsum(data$Count)
+
+ggplot(data = data, aes(x = Date, y = Count, group = 1)) +
+  geom_line()
+
