@@ -11,3 +11,5 @@ timestamps <- parse_date_time(df$Date, orders = 'dbYHMS', tz = 'GMT')
 ggplot(df) +
   aes(x = floor_date(timestamps, "month")) +
   geom_bar()
+
+count <- table(floor_date(timestamps, "month"))
