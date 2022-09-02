@@ -18,9 +18,9 @@ csv_to_df <- function(file_name) {
   return(data)
 }
 
-amulet <- csv_to_df('data/godot.csv')
-renpy <- csv_to_df('data/unity.csv')
-merged <- data.frame(merge(amulet, renpy, by = 'Date', all = TRUE))
+godot <- csv_to_df('data/godot.csv')
+unity <- csv_to_df('data/unity.csv')
+merged <- data.frame(merge(godot, unity, by = 'Date', all = TRUE))
 
 merged$Date <- as.Date(merged$Date, format = '%Y-%m-%d')
 arrange(merged, Date)
