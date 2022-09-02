@@ -18,8 +18,13 @@ csv_to_df <- function(file_name) {
   return(data)
 }
 
-amulet <- csv_to_df('data/amulet.csv')
+amulet <- csv_to_df('data/godot.csv')
+renpy <- csv_to_df('data/unity.csv')
+merged <- data.frame(merge(amulet, renpy, by = 'Date', all = TRUE))
 
-ggplot(data = amulet, aes(x = Date, y = Count, group = 1)) +
-  geom_line()
+merged$Date <- as.Date(merged$Date, format = '%Y-%m-%d')
+arrange(merged, Date)
 
+ggplot(data = merged, aes(Date, group=1)) +
+  geom_line(aes(y = Count.x, color='Godot')) +
+  geom_line(aes(y = Count.y, color='Unity'))
