@@ -20,11 +20,17 @@ csv_to_df <- function(file_name) {
 
 godot <- csv_to_df('data/godot.csv')
 unity <- csv_to_df('data/unity.csv')
-merged <- data.frame(merge(godot, unity, by = 'Date', all = TRUE))
+unreal <- csv_to_df('data/unreal-engine.csv')
+
+merged <- list(godot, unity, unreal)
+merged <- data.frame(merged %>% reduce(full_join, by='Date'))
 
 merged$Date <- as.Date(merged$Date, format = '%Y-%m-%d')
-arrange(merged, Date)
+merged <- arrange(merged, Date)
+colnames(merged) <- c('Date', 'Godot', 'Unity', 'Unreal')
 
 ggplot(data = merged, aes(Date, group=1)) +
-  geom_line(aes(y = Count.x, color='Godot')) +
-  geom_line(aes(y = Count.y, color='Unity'))
+  geom_line(aes(y = Godot, color='Godot')) +
+  geom_line(aes(y = Unity, color='Unity')) +
+  geom_line(aes(y = Unreal, color='Unreal')) +
+  ylab("Count")
