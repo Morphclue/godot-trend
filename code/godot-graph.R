@@ -1,7 +1,7 @@
 if (!require('pacman')) install.packages('pacman')
 p_load(pacman, tidyverse, ggplot2, lubridate, plyr)
 
-df <- read.csv('data/steamdb-godot.csv')
+df <- read.csv('data/steamdb-godot.csv', sep = ';')
 names(df)[1] <- 'DateTime'
 names(df)[2] <- 'Apps'
 
