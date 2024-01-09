@@ -1,5 +1,5 @@
 if (!require('pacman')) install.packages('pacman')
-p_load(pacman, tidyverse, ggplot2, lubridate, plyr)
+p_load(pacman, tidyverse, ggplot2, lubridate, plyr, RColorBrewer)
 
 csv_to_df <- function(file_name) {
   df <- read.csv(file_name, header = FALSE)
@@ -37,7 +37,7 @@ merged <- arrange(merged, Date)
 colnames(merged) <- c('Date', 'unity', 'construct', 'gamemaker', 'godot', 'twine', 'bitsy', 'unreal', 'rpgmaker', 'pico', 'renpy')
 
 ggplot(data = merged, aes(Date, group = 1)) +
-  geom_line(aes(y = unity, color = 'Unity')) +
+  # geom_line(aes(y = unity, color = 'Unity')) +
   geom_line(aes(y = construct, color = 'Construct')) +
   geom_line(aes(y = gamemaker, color = 'GameMaker: Studio')) +
   geom_line(aes(y = godot, color = 'Godot')) +
@@ -48,4 +48,7 @@ ggplot(data = merged, aes(Date, group = 1)) +
   geom_line(aes(y = pico, color = 'PICO-8')) +
   geom_line(aes(y = renpy, color = "Ren'Py")) +
   ylab("# of projects") +
-  scale_y_continuous(labels = scales::scientific_format())
+  scale_y_continuous(labels = scales::scientific_format()) +
+  scale_color_manual(values = brewer.pal(9, 'Set1')) +
+  labs(color = "Engine") +
+  theme_minimal()
