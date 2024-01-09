@@ -15,4 +15,6 @@ data$Date <- as.Date(data$Date, format = '%Y-%m-%d')
 
 ggplot(data = data, aes(Date, group = 1)) +
   geom_line(aes(y = Count)) +
-  ylab("# of apps")
+  ylab("# of apps") +
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
