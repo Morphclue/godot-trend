@@ -47,4 +47,5 @@ ggplot(data = merged, aes(Date, group = 1)) +
   geom_line(aes(y = rpgmaker, color = 'RPG Maker')) +
   geom_line(aes(y = pico, color = 'PICO-8')) +
   geom_line(aes(y = renpy, color = "Ren'Py")) +
-  ylab("# of projects")
+  ylab("# of projects") +
+  scale_y_continuous(labels = scales::scientific_format())
